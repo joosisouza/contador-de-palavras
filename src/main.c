@@ -13,6 +13,7 @@ int main(){
   char atualFlutuante = 0;
   char atualSeparador = 0;
   char numeroPontos = 0;
+  char reticencia = 0;
 
   do{
     scanf("%c", &c);
@@ -20,10 +21,19 @@ int main(){
     //Analise do caractere para fazer a verificação do final de palavra
     //Conta o número de pontos para verificar reticencias
     if(c=='.'){
-      numeroPontos++;
+      if(reticencia==0){
+        numeroPontos++;
+      }
+      else{
+        reticencia = 0;
+      }
     }
     else{
+      if(reticencia==1){
+        numeroPalavras++;
+      }
       numeroPontos = 0;
+      reticencia = 0;
     }
     //Verifica se o caractere é uma letra
     if(((c>=65)&&(c<=90))||((c>=97)&&(c<=122))){
@@ -79,7 +89,7 @@ int main(){
     }
     //Se tem 3 pontos seguidos, é uma reticencia
     if(numeroPontos==3){
-      numeroPalavras++;
+      reticencia = 1;
     }
 
     //Transfere a analise atual para a anterior para a proxima analise
